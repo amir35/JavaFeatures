@@ -1,0 +1,12 @@
+#Step-by-Step Example
+
+1. Define a Class to Serialize:
+    a. Implement the Serializable interface.
+    b. Add serialVersionUID for version control.
+    c. Mark sensitive data as transient.
+
+2. Serialize the Object:
+    a. Use ObjectOutputStream to write the object to a file.
+
+3. Deserialize the Object:
+    a. Use ObjectInputStream to read the object from the file.
