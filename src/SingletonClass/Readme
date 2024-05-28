@@ -1,0 +1,40 @@
+1. Private Constructor:
+The constructor of the Logger class is private, which prevents direct instantiation from outside the class.
+
+2. Static Instance Variable:
+The instance variable holds the single instance of the class.
+
+3. Public Static Method:
+The getInstance method provides access to the single instance. It includes a double-checked locking mechanism to ensure thread safety and efficient performance.
+
+4. Logging Method:
+The log method is an example of an operation that can be performed by the singleton instance.
+
+------------------------------------------------------------------------------------------------
+
+The synchronized (Logger.class) block inside the if condition is part of a pattern known as double-checked locking.
+This pattern is used to reduce the overhead of acquiring a lock by first testing the locking criterion (the if condition)
+without actually acquiring the lock. Only if the condition is found to be true does the actual locking logic proceed.
+
+Double-Checked Locking Pattern
+The double-checked locking pattern ensures that synchronization is only used when the singleton instance is being created
+for the first time.
+
+Here is a detailed explanation of the logic:
+
+First Check (Without Locking):
+The first if (instance == null) check is done without locking to improve performance.
+This check ensures that only if the instance is null do we proceed to acquire the lock.
+This minimizes the synchronization overhead when the instance is already initialized.
+
+Synchronization: The synchronized (Logger.class) block is used to ensure that only one thread can execute this block at a time.
+This guarantees that the singleton instance is created only once even in a multi-threaded environment.
+
+Second Check (With Locking): The second if (instance == null) check inside the synchronized block ensures that the instance
+is still null after the thread has acquired the lock. This is necessary because another thread might have already created
+the instance while the current thread was waiting to acquire the lock.
+
+Why Double-Checked Locking?
+Without the double-checked locking, every call to getInstance would involve synchronization, which would be costly in
+terms of performance because synchronization blocks are expensive and reduce throughput.
+The double-checked locking pattern helps avoid this overhead once the instance is initialized.
